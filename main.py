@@ -1,11 +1,16 @@
 import requests
 import pandas as pd
 import json
+from docx import Document
 
 url = "https://api.www.sbir.gov/public/api/awards"
 
 response = requests.get(url)
 data = response.json()
+
+doc = Document()
+doc.add_paragraph(data)
+doc.save('sbir-data.docx')
 
 df = pd.DataFrame(data)
 
